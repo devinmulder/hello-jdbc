@@ -1,5 +1,6 @@
 package hello.jdbc.service;
 
+import com.zaxxer.hikari.HikariDataSource;
 import hello.jdbc.domain.Member;
 import hello.jdbc.repository.MemberRepositoryV2;
 import org.junit.jupiter.api.AfterEach;
@@ -28,7 +29,11 @@ class MemberServiceV2Test {
 
     @BeforeEach
     void before() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(URL);
+        dataSource.setUsername(USERNAME);
+        dataSource.setPassword(PASSWORD);
         memberRepository = new MemberRepositoryV2(dataSource);
         memberService = new MemberServiceV2(dataSource, memberRepository);
     }
