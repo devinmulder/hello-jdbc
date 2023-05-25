@@ -2,6 +2,7 @@ package hello.jdbc.service;
 
 import hello.jdbc.domain.Member;
 import hello.jdbc.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,13 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
  * MemberRepository 인터페이스 의존
  */
 @Slf4j
+@RequiredArgsConstructor
 public class MemberServiceV4 {
 
     private final MemberRepository memberRepository;
-
-    public MemberServiceV4(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
 
     @Transactional
     public void accountTransfer(String fromId, String toId, int money) {
